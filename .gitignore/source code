@@ -1,0 +1,43 @@
+@echo off
+::Coded By Goldjunge91 FT11 2018
+title Proxy Server On / Off
+echo 		\\	 Willkommen im Berufskolleg Ennepetal.	//		
+@timeout 5
+@echo off
+@echo 		\\	 Willkommen im Berufskolleg Ennepetal.	//	
+@Pause
+@choice /c 12 /M "Press 1 To Set on, 2 To Set off"
+IF "%ERRORLEVEL%"=="1" GOTO Proxy_On
+IF "%ERRORLEVEL%"=="2" GOTO Proxy_Off
+GOTO end
+@pause 
+:Proxy_ON
+@rem echo gibt text aus. @echo off  
+echo DU hast Proxy On gewaelt!
+@rem diese zeile ist zum aktivieren der Proxy Verbindung 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyEnable /t REG_DWORD /d 1 /f
+echo Proxy Ein. Ok!
+@rem diese reg add zeile ist für die Proxy server ip setzung
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyServer /t REG_SZ /d "10.1.0.1:8080" /f
+echo Erfolgreich Proxy "10.1.0.1:8080" Gesetzt.
+@Pause
+@echo Vielen Dank für das Benutzen meiner Batch Datei die ich für Das Berufskolleg Ennepetal Erstellt Habe. 
+@echo Powerd By GoldJunge91
+@pause
+GOTO end
+@Pause
+:Proxy_Off
+echo  du hast Proxy_Off gewaehlt!
+@rem diese zeile ist zum leeren der server ip
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyServer /t REG_SZ /d "" /f
+@echo setze standard Proxy Ip einstellungen
+@rem diese zeile ist zum Proxy Deaktivieren
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings" /v ProxyEnable /t REG_DWORD /d 0 /f
+@echo Proxy Erfolgreich Deaktiviert
+Pause
+@echo Vielen Dank fuer das Benutzen meiner Batch Datei die ich fuer Das Berufskolleg Ennepetal Erstellt Habe. Proxy_Off
+@echo Powerd By GoldJunge91
+@Pause
+Goto end
+@PAUSE
+:: @REM Befehle mit "@" werden nicht ausgegeben. Befehle mit REM werden nicht verarbeitet. Befehle mit :: oder @REM werden weder ausgegeben noch verarbeitet.
